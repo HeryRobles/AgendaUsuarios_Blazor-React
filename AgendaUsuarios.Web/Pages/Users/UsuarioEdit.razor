@@ -1,0 +1,65 @@
+﻿@page "/usuarios/editar/{id:int}"
+@inject NavigationManager navigationManager
+@inject IRepository repository
+@inject SweetAlertService Swal
+
+<h3>Editar Usuario</h3>
+
+@if(usuario is null)
+{
+    <Loading />
+}
+else
+{
+    <UsuarioForm @ref="usuarioForm" Usuario="usuario" OnValidSubmit="Update" ReturnAction="Return" />
+}
+
+@code {
+    private Usuario? usuario;
+    private UsuarioForm? usuarioForm;
+
+    [Parameter]
+    public int id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var responseHttp = await repository.Get<Usuario>($"/api/usuarios/{id}");
+
+        if (responseHttp.Error)
+        {
+            if (responseHttp.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                navigationManager.NavigateTo("/usuarios");
+            }
+            else
+            {
+                var mensajeError = await responseHttp.GetErrorMessageAsync();
+                await Swal.FireAsync("Error", mensajeError, SweetAlertIcon.Error);
+            }
+
+        }
+        else
+        {
+            usuario = responseHttp.Response;
+        }
+    }
+    private async Task Update()
+    {
+        var responseHttp = await repository.Put($"/api/usuarios/{usuario.Id}", usuario);
+        if (responseHttp.Error)
+        {
+            var mensajeError = await responseHttp.GetErrorMessageAsync();
+            await Swal.FireAsync("Error", mensajeError, SweetAlertIcon.Error);
+        }
+        else
+        {
+            usuarioForm!.FormPostedSuccessfully = true;
+            navigationManager.NavigateTo("/usuarios");
+        }
+    }
+
+    private void Return()
+    {
+        navigationManager.NavigateTo("usuarios");
+    }
+}

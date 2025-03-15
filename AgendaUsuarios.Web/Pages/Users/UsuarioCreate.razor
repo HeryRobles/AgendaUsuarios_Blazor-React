@@ -1,0 +1,35 @@
+﻿@page "/usuarios/crear"
+@inject IRepository repository
+@inject NavigationManager navigationManager;
+@inject SweetAlertService Swal
+
+<h3>Crear Usuario</h3>
+
+<UsuarioForm @ref="usuarioForm" Usuario="usuario" OnValidSubmit="Create" ReturnAction="Return"/>
+
+@code {
+    private Usuario usuario = new();
+    private UsuarioForm? usuarioForm;
+
+    private async Task Create()
+    {
+        var responseHttp = await repository.Post("/api/usuarios", usuario); 
+        if (responseHttp.Error) 
+        { 
+            var mensajeError = await responseHttp.GetErrorMessageAsync();
+            await Swal.FireAsync("Error", mensajeError, SweetAlertIcon.Error);
+        }
+        else
+        {
+            usuarioForm!.FormPostedSuccessfully = true;
+            navigationManager.NavigateTo("/usuarios");
+        }
+        
+    }
+    private void Return() 
+    { 
+        navigationManager.NavigateTo("/usuarios"); 
+    }
+}
+
+

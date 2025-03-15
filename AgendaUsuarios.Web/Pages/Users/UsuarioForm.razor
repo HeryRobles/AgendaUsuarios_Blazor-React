@@ -1,0 +1,72 @@
+﻿@inject SweetAlertService Swal
+
+<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation"></NavigationLock>
+
+<EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="mb-3">
+        <label>Usuario</label>
+        <div>
+            <InputText class="form-control" @bind-Value="@Usuario.Nombre"/>
+            <ValidationMessage For="@(() => Usuario.Nombre)" />
+            <InputText class="form-control" @bind-Value="@Usuario.Apellido" />
+            <ValidationMessage For="@(() => Usuario.Apellido)" />
+            <InputText class="form-control" @bind-Value="@Usuario.Email" />
+            <ValidationMessage For="@(() => Usuario.Email)" />
+            <InputText class="form-control" @bind-Value="@Usuario.Telefono" />
+            <ValidationMessage For="@(() => Usuario.Telefono)" />
+        </div>
+    </div>
+
+    <button clas"btn btn-primay" type="submit">Guardar Cambios</button>
+    <button class="btn btn-success" @onclick="ReturnAction">Regresar</button>
+</EditForm>
+
+@code {
+    private EditContext editContext = null!;
+    protected override void OnInitialized()
+    {
+        editContext = new(Usuario);
+    }
+    [EditorRequired]
+    [Parameter]
+    public Usuario Usuario { get; set; } = null!;
+
+    [EditorRequired]
+    [Parameter] 
+    public EventCallback OnValidSubmit { get; set; }
+
+    [EditorRequired]
+    [Parameter] 
+    public EventCallback ReturnAction { get; set; }
+
+    public bool FormPostedSuccessfully { get; set; } = false;
+    private async Task OnBeforeInternalNavigation(LocationChangingContext context)
+    {
+        var formWasEdited = editContext.IsModified();
+        if (!formWasEdited)
+        {
+            return;
+        }
+        if (FormPostedSuccessfully)
+        {
+            return;
+        }
+
+        var result = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "¿Estás seguro?",
+                Text = "Si navegas fuera de esta página perderás los cambios realizados",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+            // ConfirmButtonText = "Sí, salir",
+            // CancelButtonText = "No, quedarme",
+            });
+        var confirm = !string.IsNullOrEmpty(result.Value);
+        if (confirm)
+        {
+            return;
+        }
+        context.PreventNavigation();
+    }
+}

@@ -1,11 +1,13 @@
 ﻿@page "/usuarios"
+@inject IRepository repository
+@inject SweetAlertService Swal
+@inject NavigationManager navigationManager
 
 
 <h3>Usuarios</h3>
 
-<div class="mb-3">
-    <a class=" btn btn-primary" href="/usuarios/crear">Nuevo Usuario</a>
-</div>
+<a class="btn btn-primary" href="/usuarios/crear">Nuevo País</a>
+
 <GenericList MyList="Usuarios">
     <Body>
         <table class="table table-striped">
@@ -26,8 +28,8 @@
                         <td>@usuario.Email</td>
                         <td>@usuario.Telefono</td>
                         <td>
-                            <a class="btn btn-primary">Editar</a>
-                            <button class="btn btn-danger">Eliminar</button>
+                            <a href="/usuarios/editar/@usuario.Id" class="btn btn-primary">Editar</a>
+                            <button class="btn btn-danger" @onclick=@(()=> Delete(usuario))>Eliminar</button>
                         </td>
                     </tr>
                 }
