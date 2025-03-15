@@ -7,13 +7,17 @@
     <div class="mb-3">
         <label>Usuario</label>
         <div>
-            <InputText class="form-control" @bind-Value="@Usuario.Nombre"/>
+            <label for="nombre">Nombre</label>
+            <InputText id="nombre" class="form-control" @bind-Value="@Usuario.Nombre"/>
             <ValidationMessage For="@(() => Usuario.Nombre)" />
-            <InputText class="form-control" @bind-Value="@Usuario.Apellido" />
+            <label for="apellido">Apellido</label>
+            <InputText id="apellido" class="form-control" @bind-Value="@Usuario.Apellido" />
             <ValidationMessage For="@(() => Usuario.Apellido)" />
-            <InputText class="form-control" @bind-Value="@Usuario.Email" />
+            <label for="email">Email</label>
+            <InputText id="email" class="form-control" @bind-Value="@Usuario.Email" />
             <ValidationMessage For="@(() => Usuario.Email)" />
-            <InputText class="form-control" @bind-Value="@Usuario.Telefono" />
+            <label for="telefono">Telefono</label>
+            <InputText id="telefono" class="form-control" @bind-Value="@Usuario.Telefono" />
             <ValidationMessage For="@(() => Usuario.Telefono)" />
         </div>
     </div>
