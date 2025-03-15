@@ -1,0 +1,37 @@
+﻿@page "/usuarios"
+
+
+<h3>Usuarios</h3>
+
+<div class="mb-3">
+    <a class=" btn btn-primary" href="/usuarios/crear">Nuevo Usuario</a>
+</div>
+<GenericList MyList="Usuarios">
+    <Body>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Telefono</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var usuario in Usuarios!)
+                {
+                    <tr>
+                        <td>@usuario.Nombre</td>
+                        <td>@usuario.Apellido</td>
+                        <td>@usuario.Email</td>
+                        <td>@usuario.Telefono</td>
+                        <td>
+                            <a class="btn btn-warning">Editar</a>
+                            <button class="btn btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </Body>
+</GenericList>

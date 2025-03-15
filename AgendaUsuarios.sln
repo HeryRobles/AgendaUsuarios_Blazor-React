@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35828.75 d17.13
+VisualStudioVersion = 17.13.35828.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaUsuarios.API", "AgendaUsuarios.API\AgendaUsuarios.API.csproj", "{1FCB8AF1-6BED-490C-AD0E-73FB2D694CD2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaUsuarios.Model", "AgendaUsuarios.Model\AgendaUsuarios.Model.csproj", "{570A38FE-ADA0-4D39-A06C-F1E1A28B128B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaUsuarios.DAL", "AgendaUsuarios.DAL\AgendaUsuarios.DAL.csproj", "{4D51D60B-7E2F-41F3-A717-56B3AA31DD5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaUsuarios.Web", "AgendaUsuarios.Web\AgendaUsuarios.Web.csproj", "{63920A23-3D9F-45D0-91DC-B40BFF922CBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{4D51D60B-7E2F-41F3-A717-56B3AA31DD5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D51D60B-7E2F-41F3-A717-56B3AA31DD5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D51D60B-7E2F-41F3-A717-56B3AA31DD5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63920A23-3D9F-45D0-91DC-B40BFF922CBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63920A23-3D9F-45D0-91DC-B40BFF922CBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63920A23-3D9F-45D0-91DC-B40BFF922CBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63920A23-3D9F-45D0-91DC-B40BFF922CBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
